@@ -1700,7 +1700,6 @@ namespace CommunityServiceHoursTracker
                 {
                     hours = "0" + hours;
                 }
-                MessageBox.Show("hours: " + hours + "   mins: " + mins);
                 txtTotalHours.Text = String.Format("{0}:{1}", hours, mins);
 
                 if (DS.Tables["AllHours"].Rows.Count > 0)
