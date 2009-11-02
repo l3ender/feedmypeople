@@ -1664,12 +1664,21 @@ namespace CommunityServiceHoursTracker
                 string mins;
                 DS.Tables["AllHours"].Columns.Add("Time Difference", System.Type.GetType("System.String"));
                 foreach(DataRow r in DS.Tables["AllHours"].Rows){
-                    DateTime timeIn = Convert.ToDateTime(r["TimeIn"]);
-                    DateTime timeOut = Convert.ToDateTime(r["TimeOut"]);
+                    //constructor as follows:
+                    //DateTime(int year, int month, int day, int hour, int minute, int second, int millisecond);
+                    //create these dates by hand so that the milliseconds don't mess up calculations (set milliseconds on both to zero)
+                    DateTime initialTimeIn = Convert.ToDateTime(r["TimeIn"]);
+                    DateTime initialTimeOut = Convert.ToDateTime(r["TimeOut"]);
+
+                    DateTime timeIn = new DateTime(initialTimeIn.Year, initialTimeIn.Month, initialTimeIn.Day, initialTimeIn.Hour,
+                        initialTimeIn.Minute, initialTimeIn.Second, 0);
+                    DateTime timeOut = new DateTime(initialTimeOut.Year, initialTimeOut.Month, initialTimeOut.Day, initialTimeOut.Hour,
+                        initialTimeOut.Minute, initialTimeOut.Second, 0);
+                    
                     TimeSpan ts = timeOut - timeIn;
                     total += ts;
-                    hours = Convert.ToInt32(ts.TotalHours).ToString();
-                    mins = (Convert.ToInt32(ts.TotalMinutes) % 60).ToString();
+                    hours = Convert.ToInt32(ts.Hours).ToString();
+                    mins = Convert.ToInt32(ts.Minutes).ToString();
                     if ((Convert.ToInt32(mins) < 10) && (Convert.ToInt32(mins) >= 0))
                     {
                         mins = "0" + mins;
@@ -1681,8 +1690,8 @@ namespace CommunityServiceHoursTracker
 
                     r["Time Difference"] = String.Format("{0}:{1}", hours, mins);
                 }
-                hours = Convert.ToInt32(total.TotalHours).ToString();
-                mins = (Convert.ToInt32(total.TotalMinutes) % 60).ToString();
+                hours = Convert.ToInt32(total.Hours).ToString();
+                mins = Convert.ToInt32(total.Minutes).ToString();
                 if ((Convert.ToInt32(mins) < 10) && (Convert.ToInt32(mins) >= 0))
                 {
                     mins = "0" + mins;
@@ -1691,6 +1700,7 @@ namespace CommunityServiceHoursTracker
                 {
                     hours = "0" + hours;
                 }
+                MessageBox.Show("hours: " + hours + "   mins: " + mins);
                 txtTotalHours.Text = String.Format("{0}:{1}", hours, mins);
 
                 if (DS.Tables["AllHours"].Rows.Count > 0)
@@ -1736,6 +1746,21 @@ namespace CommunityServiceHoursTracker
             {
                 thisConnection.Close();
             }  
+        }
+
+        private void TotalHoursTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grdViewHours_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtTotalHours_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
