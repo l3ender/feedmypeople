@@ -350,15 +350,18 @@ namespace CommunityServiceHoursTracker
             }
             try
             {
-                DateTime startDateTime = (DateTime)dateTimePicker4.Value;
-                DateTime endDateTime = (DateTime)dateTimePicker5.Value;
+                //constructor as follows:
+                //DateTime(int year, int month, int day, int hour, int minute, int second, int millisecond);
+                //create these dates by hand so that the milliseconds don't mess up calculations (set milliseconds on both to zero)
+                DateTime startDateTime = new DateTime(dateTimePicker4.Value.Year, dateTimePicker4.Value.Month, dateTimePicker4.Value.Day, dateTimePicker4.Value.Hour,
+                    dateTimePicker4.Value.Minute, dateTimePicker4.Value.Second, 0);
+                DateTime endDateTime = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, dateTimePicker5.Value.Day, dateTimePicker5.Value.Hour,
+                    dateTimePicker5.Value.Minute, dateTimePicker5.Value.Second, 0);
 
                 TimeSpan ts = endDateTime.Subtract(startDateTime);
-                
-                string hours = Convert.ToInt32(ts.TotalHours).ToString();
-                string mins = (Convert.ToInt32(ts.TotalMinutes) % 60).ToString();
-                
-                //MessageBox.Show("Hours: " + hours + " Minutes: " + mins);
+
+                string hours = Convert.ToInt32(ts.Hours).ToString();
+                string mins = Convert.ToInt32(ts.Minutes).ToString();
                 
                 if ((Convert.ToInt32(mins) < 10) && (Convert.ToInt32(mins) >= 0))
                 {
@@ -368,13 +371,6 @@ namespace CommunityServiceHoursTracker
                 {
                     hours = "0" + hours;
                 }
-                /*
-                String show = "Time In: " + dateTimePicker4.Value + "   " + "Time Out: " + dateTimePicker5.Value;
-                MessageBox.Show(show);
-                //int compare = (dateTimePicker5.Value.CompareTo(dateTimePicker4.Value));
-                bool checking = equalDateTimes();
-                MessageBox.Show(checking.ToString());
-                */
                 if(tabControl1.SelectedTab.Equals(tabPage1))
                 {
                     if ((DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) == 0)
@@ -390,10 +386,6 @@ namespace CommunityServiceHoursTracker
                         TotalHoursTextBox.Text = "00:00";
                     }
                 }
-                //else
-                //{
-                //    TotalHoursTextBox.Text = hours + ":" + mins;
-                //}
             }
             catch (Exception ex)
             {
