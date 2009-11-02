@@ -1511,11 +1511,12 @@ namespace CommunityServiceHoursTracker
                     //hours = (ts.Days * 24) + ts.Hours + (ts.Minutes / 60);
 
                     t.Cell(rowCount, 1).Range.Text = tIn.ToShortDateString();
-                    t.Cell(rowCount, 2).Range.Text = tIn.ToString("MM/dd/yyyy") + " " + tIn.ToString("hh:mm") + " " + tIn.ToString("tt");
-                    t.Cell(rowCount, 3).Range.Text = tOut.ToString("MM/dd/yyyy") + " " + tOut.ToString("hh:mm") + " " + tOut.ToString("tt");
+                 //   t.Cell(rowCount, 2).Range.Text = tIn.ToString("MM/dd/yyyy") + " " + tIn.ToString("hh:mm") + " " + tIn.ToString("tt");
+                 //   t.Cell(rowCount, 3).Range.Text = tOut.ToString("MM/dd/yyyy") + " " + tOut.ToString("hh:mm") + " " + tOut.ToString("tt");
 
-      //              t.Cell(rowCount, 2).Range.Text = tIn.ToString(tIn.ToString("hh:mm") + " " + tIn.ToString("tt");
-      //              t.Cell(rowCount, 3).Range.Text = tOut.ToString(tOut.ToString("hh:mm") + " " + tOut.ToString("tt");
+                    t.Cell(rowCount, 2).Range.Text = tIn.ToString("hh:mm") + " " + tIn.ToString("tt");
+                    t.Cell(rowCount, 3).Range.Text = tOut.ToString("hh:mm") + " " + tOut.ToString("tt");
+
 
                     //t.Cell(rowCount, 4).Range.Text = hours.ToString();
                     t.Cell(rowCount, 4).Range.Text = (Math.Round(ts.TotalHours, 2)).ToString();
