@@ -19,6 +19,10 @@ namespace CommunityServiceHoursTracker
         bool isUpdate = true;
         bool resettingTime = false;
 
+        //strings to hold the hours and times in the time amount
+        string hour = string.Empty;
+        string min = string.Empty;
+
         public Form1()
         {
             InitializeComponent();
@@ -362,6 +366,8 @@ namespace CommunityServiceHoursTracker
 
                 string hours = Convert.ToInt32(ts.Hours).ToString();
                 string mins = Convert.ToInt32(ts.Minutes).ToString();
+                hour = hours;
+                min = mins;
                 
                 if ((Convert.ToInt32(mins) < 10) && (Convert.ToInt32(mins) >= 0))
                 {
@@ -371,21 +377,27 @@ namespace CommunityServiceHoursTracker
                 {
                     hours = "0" + hours;
                 }
-                if(tabControl1.SelectedTab.Equals(tabPage1))
-                {
-                    if ((DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) == 0)
-                        || (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) < 0)
-                        || equalDateTimes())
-                    {
-                        TotalHoursTextBox.Text = hours + ":" + mins;
-                    }
-                    else if (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) > 0)
-                    {
-                        MessageBox.Show("Time in is not before time out.");
+
+
+
+                //if(tabControl1.SelectedTab.Equals(tabPage1))
+                //{
+                //    if ((DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) == 0)
+                //        || (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) < 0)
+                //        || equalDateTimes())
+                //    {
+                //        TotalHoursTextBox.Text = hours + ":" + mins;
+                //    }
+                //    else if (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) > 0)
+                //    {
+                //        MessageBox.Show("Time in is not before time out.");
                         
-                        TotalHoursTextBox.Text = "00:00";
-                    }
-                }
+                //        TotalHoursTextBox.Text = "00:00";
+                //    }
+                //}
+
+
+
             }
             catch (Exception ex)
             {
@@ -408,26 +420,56 @@ namespace CommunityServiceHoursTracker
             }
             return check;
         }
+
+        private int CheckDateTimePickers()
+        {
+            int pass = 0;
+
+            if (tabControl1.SelectedTab.Equals(tabPage1))
+            {
+                if ((DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) == 0)
+                    || (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) < 0)
+                    || equalDateTimes())
+                {
+                    TotalHoursTextBox.Text = hour + ":" + min;
+                    pass = 1;
+                }
+                else if (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) > 0)
+                {
+                    MessageBox.Show("Time in is not before time out.");
+
+                    TotalHoursTextBox.Text = "00:00";
+                }
+            }
+            return pass;
+        }
         
         private void SaveTimeButton_Click(object sender, EventArgs e)
         {
+
+
+            int pass = CheckDateTimePickers();
+            
             try
             {
-                thisConnection = new MySqlConnection(connStr);
-                thisConnection.Open();
-                MySqlCommand thisCommand = thisConnection.CreateCommand();
-                thisCommand.CommandText = "INSERT INTO event (TimeIn, TimeOut, CaseID) VALUES(@StartTime, @EndTime, @CaseID);";
-                thisCommand.Parameters.Add("@StartTime", MySqlDbType.DateTime);
-                thisCommand.Parameters["@StartTime"].Value = dateTimePicker4.Value;
-                thisCommand.Parameters.Add("@EndTime", MySqlDbType.DateTime);
-                thisCommand.Parameters["@EndTime"].Value = dateTimePicker5.Value;
-                thisCommand.Parameters.Add("@CaseID", MySqlDbType.Int32);
-                thisCommand.Parameters["@CaseID"].Value = SelectCase1DDL.SelectedValue;
-                thisCommand.Prepare();
-                thisCommand.ExecuteNonQuery();
-                MessageBox.Show("Your event was saved successfully.");
-                fillTimeGrid();
-                ResetEnterTime();
+                if (pass == 1)
+                {
+                    thisConnection = new MySqlConnection(connStr);
+                    thisConnection.Open();
+                    MySqlCommand thisCommand = thisConnection.CreateCommand();
+                    thisCommand.CommandText = "INSERT INTO event (TimeIn, TimeOut, CaseID) VALUES(@StartTime, @EndTime, @CaseID);";
+                    thisCommand.Parameters.Add("@StartTime", MySqlDbType.DateTime);
+                    thisCommand.Parameters["@StartTime"].Value = dateTimePicker4.Value;
+                    thisCommand.Parameters.Add("@EndTime", MySqlDbType.DateTime);
+                    thisCommand.Parameters["@EndTime"].Value = dateTimePicker5.Value;
+                    thisCommand.Parameters.Add("@CaseID", MySqlDbType.Int32);
+                    thisCommand.Parameters["@CaseID"].Value = SelectCase1DDL.SelectedValue;
+                    thisCommand.Prepare();
+                    thisCommand.ExecuteNonQuery();
+                    MessageBox.Show("Your event was saved successfully.");
+                    fillTimeGrid();
+                    ResetEnterTime();
+                }
             }
             catch (MySqlException ee)
             {
