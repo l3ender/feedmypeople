@@ -180,12 +180,13 @@
             this.grdViewHours.AllowUserToDeleteRows = false;
             this.grdViewHours.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdViewHours.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdViewHours.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.grdViewHours.Location = new System.Drawing.Point(461, 72);
+            this.grdViewHours.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.grdViewHours.Location = new System.Drawing.Point(482, 72);
             this.grdViewHours.Name = "grdViewHours";
             this.grdViewHours.RowHeadersVisible = false;
             this.grdViewHours.Size = new System.Drawing.Size(359, 191);
             this.grdViewHours.TabIndex = 86;
+            this.grdViewHours.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdViewHours_CellContentClick_1);
             // 
             // TotalHoursTextBox
             // 

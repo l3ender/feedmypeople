@@ -1756,10 +1756,15 @@ namespace CommunityServiceHoursTracker
         {
 
         }
-
+        
         private void txtTotalHours_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void grdViewHours_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }
