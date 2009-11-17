@@ -30,6 +30,23 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.outAmPm = new System.Windows.Forms.ComboBox();
+            this.outMin = new System.Windows.Forms.TextBox();
+            this.outHour = new System.Windows.Forms.TextBox();
+            this.outYear = new System.Windows.Forms.TextBox();
+            this.outDay = new System.Windows.Forms.TextBox();
+            this.outMonth = new System.Windows.Forms.TextBox();
+            this.inAmPm = new System.Windows.Forms.ComboBox();
+            this.inMin = new System.Windows.Forms.TextBox();
+            this.inHour = new System.Windows.Forms.TextBox();
+            this.inYear = new System.Windows.Forms.TextBox();
+            this.inDay = new System.Windows.Forms.TextBox();
+            this.inMonth = new System.Windows.Forms.TextBox();
             this.txtNeeded = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.txtTotalHours = new System.Windows.Forms.TextBox();
@@ -40,8 +57,6 @@
             this.SaveTimeButton = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
             this.SelectCase1DDL = new System.Windows.Forms.ComboBox();
@@ -95,6 +110,12 @@
             this.CreateMonthlyReportButton = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewHours)).BeginInit();
@@ -119,6 +140,29 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label37);
+            this.tabPage1.Controls.Add(this.label36);
+            this.tabPage1.Controls.Add(this.label35);
+            this.tabPage1.Controls.Add(this.label34);
+            this.tabPage1.Controls.Add(this.label33);
+            this.tabPage1.Controls.Add(this.label32);
+            this.tabPage1.Controls.Add(this.label31);
+            this.tabPage1.Controls.Add(this.label30);
+            this.tabPage1.Controls.Add(this.label29);
+            this.tabPage1.Controls.Add(this.label28);
+            this.tabPage1.Controls.Add(this.label27);
+            this.tabPage1.Controls.Add(this.outAmPm);
+            this.tabPage1.Controls.Add(this.outMin);
+            this.tabPage1.Controls.Add(this.outHour);
+            this.tabPage1.Controls.Add(this.outYear);
+            this.tabPage1.Controls.Add(this.outDay);
+            this.tabPage1.Controls.Add(this.outMonth);
+            this.tabPage1.Controls.Add(this.inAmPm);
+            this.tabPage1.Controls.Add(this.inMin);
+            this.tabPage1.Controls.Add(this.inHour);
+            this.tabPage1.Controls.Add(this.inYear);
+            this.tabPage1.Controls.Add(this.inDay);
+            this.tabPage1.Controls.Add(this.inMonth);
             this.tabPage1.Controls.Add(this.txtNeeded);
             this.tabPage1.Controls.Add(this.label26);
             this.tabPage1.Controls.Add(this.txtTotalHours);
@@ -129,8 +173,6 @@
             this.tabPage1.Controls.Add(this.SaveTimeButton);
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.label13);
-            this.tabPage1.Controls.Add(this.dateTimePicker5);
-            this.tabPage1.Controls.Add(this.dateTimePicker4);
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -139,6 +181,163 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Enter Time";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(282, 76);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(24, 13);
+            this.label31.TabIndex = 107;
+            this.label31.Text = "Min";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(240, 76);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(30, 13);
+            this.label30.TabIndex = 106;
+            this.label30.Text = "Hour";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(185, 76);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(29, 13);
+            this.label29.TabIndex = 105;
+            this.label29.Text = "Year";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(138, 76);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(26, 13);
+            this.label28.TabIndex = 104;
+            this.label28.Text = "Day";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(92, 76);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(37, 13);
+            this.label27.TabIndex = 103;
+            this.label27.Text = "Month";
+            // 
+            // outAmPm
+            // 
+            this.outAmPm.FormattingEnabled = true;
+            this.outAmPm.Items.AddRange(new object[] {
+            "AM",
+            "PM"});
+            this.outAmPm.Location = new System.Drawing.Point(314, 132);
+            this.outAmPm.Name = "outAmPm";
+            this.outAmPm.Size = new System.Drawing.Size(52, 21);
+            this.outAmPm.TabIndex = 102;
+            this.outAmPm.SelectedIndexChanged += new System.EventHandler(this.dateValueChanged);
+            // 
+            // outMin
+            // 
+            this.outMin.Location = new System.Drawing.Point(279, 132);
+            this.outMin.Name = "outMin";
+            this.outMin.Size = new System.Drawing.Size(28, 20);
+            this.outMin.TabIndex = 101;
+            this.outMin.Leave += new System.EventHandler(this.dateValueChanged);
+            // 
+            // outHour
+            // 
+            this.outHour.Location = new System.Drawing.Point(240, 132);
+            this.outHour.Name = "outHour";
+            this.outHour.Size = new System.Drawing.Size(28, 20);
+            this.outHour.TabIndex = 100;
+            this.outHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.outHour.Leave += new System.EventHandler(this.dateValueChanged);
+            // 
+            // outYear
+            // 
+            this.outYear.Location = new System.Drawing.Point(179, 132);
+            this.outYear.Name = "outYear";
+            this.outYear.Size = new System.Drawing.Size(39, 20);
+            this.outYear.TabIndex = 99;
+            this.outYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.outYear.Leave += new System.EventHandler(this.dateValueChanged);
+            // 
+            // outDay
+            // 
+            this.outDay.Location = new System.Drawing.Point(137, 132);
+            this.outDay.Name = "outDay";
+            this.outDay.Size = new System.Drawing.Size(28, 20);
+            this.outDay.TabIndex = 98;
+            this.outDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.outDay.Leave += new System.EventHandler(this.dateValueChanged);
+            // 
+            // outMonth
+            // 
+            this.outMonth.Location = new System.Drawing.Point(96, 132);
+            this.outMonth.Name = "outMonth";
+            this.outMonth.Size = new System.Drawing.Size(28, 20);
+            this.outMonth.TabIndex = 97;
+            this.outMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.outMonth.Leave += new System.EventHandler(this.dateValueChanged);
+            // 
+            // inAmPm
+            // 
+            this.inAmPm.FormattingEnabled = true;
+            this.inAmPm.Items.AddRange(new object[] {
+            "AM",
+            "PM"});
+            this.inAmPm.Location = new System.Drawing.Point(314, 96);
+            this.inAmPm.Name = "inAmPm";
+            this.inAmPm.Size = new System.Drawing.Size(52, 21);
+            this.inAmPm.TabIndex = 96;
+            this.inAmPm.SelectedIndexChanged += new System.EventHandler(this.dateValueChanged);
+            // 
+            // inMin
+            // 
+            this.inMin.Location = new System.Drawing.Point(279, 96);
+            this.inMin.Name = "inMin";
+            this.inMin.Size = new System.Drawing.Size(28, 20);
+            this.inMin.TabIndex = 95;
+            this.inMin.Leave += new System.EventHandler(this.dateValueChanged);
+            // 
+            // inHour
+            // 
+            this.inHour.Location = new System.Drawing.Point(240, 96);
+            this.inHour.Name = "inHour";
+            this.inHour.Size = new System.Drawing.Size(28, 20);
+            this.inHour.TabIndex = 94;
+            this.inHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.inHour.Leave += new System.EventHandler(this.dateValueChanged);
+            // 
+            // inYear
+            // 
+            this.inYear.Location = new System.Drawing.Point(179, 96);
+            this.inYear.Name = "inYear";
+            this.inYear.Size = new System.Drawing.Size(39, 20);
+            this.inYear.TabIndex = 93;
+            this.inYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inYear.Leave += new System.EventHandler(this.dateValueChanged);
+            // 
+            // inDay
+            // 
+            this.inDay.Location = new System.Drawing.Point(137, 96);
+            this.inDay.Name = "inDay";
+            this.inDay.Size = new System.Drawing.Size(28, 20);
+            this.inDay.TabIndex = 92;
+            this.inDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inDay.Leave += new System.EventHandler(this.dateValueChanged);
+            // 
+            // inMonth
+            // 
+            this.inMonth.Location = new System.Drawing.Point(96, 96);
+            this.inMonth.Name = "inMonth";
+            this.inMonth.Size = new System.Drawing.Size(28, 20);
+            this.inMonth.TabIndex = 91;
+            this.inMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inMonth.Leave += new System.EventHandler(this.dateValueChanged);
             // 
             // txtNeeded
             // 
@@ -186,20 +385,20 @@
             this.grdViewHours.RowHeadersVisible = false;
             this.grdViewHours.Size = new System.Drawing.Size(359, 191);
             this.grdViewHours.TabIndex = 86;
-            this.grdViewHours.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdViewHours_CellContentClick_1);
             // 
             // TotalHoursTextBox
             // 
             this.TotalHoursTextBox.Enabled = false;
-            this.TotalHoursTextBox.Location = new System.Drawing.Point(96, 134);
+            this.TotalHoursTextBox.Location = new System.Drawing.Point(96, 170);
             this.TotalHoursTextBox.Name = "TotalHoursTextBox";
-            this.TotalHoursTextBox.Size = new System.Drawing.Size(100, 20);
+            this.TotalHoursTextBox.Size = new System.Drawing.Size(75, 20);
             this.TotalHoursTextBox.TabIndex = 85;
+            this.TotalHoursTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(28, 137);
+            this.label17.Location = new System.Drawing.Point(28, 173);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(57, 13);
             this.label17.TabIndex = 84;
@@ -207,7 +406,7 @@
             // 
             // SaveTimeButton
             // 
-            this.SaveTimeButton.Location = new System.Drawing.Point(96, 176);
+            this.SaveTimeButton.Location = new System.Drawing.Point(96, 212);
             this.SaveTimeButton.Name = "SaveTimeButton";
             this.SaveTimeButton.Size = new System.Drawing.Size(75, 23);
             this.SaveTimeButton.TabIndex = 83;
@@ -218,7 +417,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(28, 107);
+            this.label16.Location = new System.Drawing.Point(28, 135);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(50, 13);
             this.label16.TabIndex = 82;
@@ -227,31 +426,11 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(28, 76);
+            this.label13.Location = new System.Drawing.Point(28, 100);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(42, 13);
             this.label13.TabIndex = 81;
             this.label13.Text = "Time In";
-            // 
-            // dateTimePicker5
-            // 
-            this.dateTimePicker5.CustomFormat = "MM/dd/yyyy hh:mm tt";
-            this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker5.Location = new System.Drawing.Point(96, 103);
-            this.dateTimePicker5.Name = "dateTimePicker5";
-            this.dateTimePicker5.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker5.TabIndex = 80;
-            this.dateTimePicker5.ValueChanged += new System.EventHandler(this.dateTimePickerEnterTime_ValueChanged);
-            // 
-            // dateTimePicker4
-            // 
-            this.dateTimePicker4.CustomFormat = "MM/dd/yyyy hh:mm tt";
-            this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker4.Location = new System.Drawing.Point(96, 72);
-            this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker4.TabIndex = 79;
-            this.dateTimePicker4.ValueChanged += new System.EventHandler(this.dateTimePickerEnterTime_ValueChanged);
             // 
             // panel2
             // 
@@ -781,6 +960,66 @@
             this.label20.TabIndex = 80;
             this.label20.Text = "Community Service Hours Monthly Report";
             // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(268, 98);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(11, 13);
+            this.label32.TabIndex = 108;
+            this.label32.Text = ":";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(268, 134);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(11, 13);
+            this.label33.TabIndex = 109;
+            this.label33.Text = ":";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(124, 99);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(13, 13);
+            this.label34.TabIndex = 110;
+            this.label34.Text = "/";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Location = new System.Drawing.Point(166, 99);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(13, 13);
+            this.label35.TabIndex = 111;
+            this.label35.Text = "/";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(166, 135);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(13, 13);
+            this.label36.TabIndex = 112;
+            this.label36.Text = "/";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(124, 135);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(13, 13);
+            this.label37.TabIndex = 113;
+            this.label37.Text = "/";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -849,13 +1088,11 @@
         private System.Windows.Forms.TextBox txtHoursAssigned;
         private System.Windows.Forms.Button EditCaseButton;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker4;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox SelectVolunteer1DDL;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DateTimePicker dateTimePicker5;
         private System.Windows.Forms.TextBox TotalHoursTextBox;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button SaveTimeButton;
@@ -881,6 +1118,29 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox txtNeeded;
+        private System.Windows.Forms.ComboBox inAmPm;
+        private System.Windows.Forms.TextBox inMin;
+        private System.Windows.Forms.TextBox inHour;
+        private System.Windows.Forms.TextBox inYear;
+        private System.Windows.Forms.TextBox inDay;
+        private System.Windows.Forms.TextBox inMonth;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ComboBox outAmPm;
+        private System.Windows.Forms.TextBox outMin;
+        private System.Windows.Forms.TextBox outHour;
+        private System.Windows.Forms.TextBox outYear;
+        private System.Windows.Forms.TextBox outDay;
+        private System.Windows.Forms.TextBox outMonth;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label35;
     }
 }
 

@@ -317,17 +317,41 @@ namespace CommunityServiceHoursTracker
         {
             if (SelectCase1DDL.Items.Count.Equals(0))
             {
-                dateTimePicker4.Enabled = false;
-                dateTimePicker5.Enabled = false;
+                inMonth.Enabled = false;
+                inDay.Enabled = false;
+                inYear.Enabled = false;
+                inHour.Enabled = false;
+                inMin.Enabled = false;
+                inAmPm.Enabled = false;
+
+                outMonth.Enabled = false;
+                outDay.Enabled = false;
+                outYear.Enabled = false;
+                outHour.Enabled = false;
+                outMin.Enabled = false;
+                outAmPm.Enabled = false;
+
                 TotalHoursTextBox.Enabled = false;
                 SaveTimeButton.Enabled = false;
+
                 //MessageBox.Show("This tab is disabled because the selected volunteer does not have an active case assigned");
             }
             else if (SelectCase1DDL.Items.Count > 0)
             {
-                dateTimePicker4.Enabled = true;
-                dateTimePicker5.Enabled = true;
-                //TotalHoursTextBox.Enabled = true;
+                inMonth.Enabled = true;
+                inDay.Enabled = true;
+                inYear.Enabled = true;
+                inHour.Enabled = true;
+                inMin.Enabled = true;
+                inAmPm.Enabled = true;
+
+                outMonth.Enabled = true;
+                outDay.Enabled = true;
+                outYear.Enabled = true;
+                outHour.Enabled = true;
+                outMin.Enabled = true;
+                outAmPm.Enabled = true;
+
                 SaveTimeButton.Enabled = true;
             }
         }
@@ -345,24 +369,23 @@ namespace CommunityServiceHoursTracker
            
         }
 
-        private void dateTimePickerEnterTime_ValueChanged(object sender, EventArgs e)
+        private void dateValueChanged(object sender, EventArgs e)
         {
-            //Handles both dateTimePicker4 and dateTimePicker5 ValueChanged events
             if (resettingTime)
             {
                 return; //we are resetting the time programmatically so we don't want to compare...only when done by a person
             }
             try
             {
-                //constructor as follows:
-                //DateTime(int year, int month, int day, int hour, int minute, int second, int millisecond);
-                //create these dates by hand so that the milliseconds don't mess up calculations (set milliseconds on both to zero)
-                DateTime startDateTime = new DateTime(dateTimePicker4.Value.Year, dateTimePicker4.Value.Month, dateTimePicker4.Value.Day, dateTimePicker4.Value.Hour,
-                    dateTimePicker4.Value.Minute, dateTimePicker4.Value.Second, 0);
-                DateTime endDateTime = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, dateTimePicker5.Value.Day, dateTimePicker5.Value.Hour,
-                    dateTimePicker5.Value.Minute, dateTimePicker5.Value.Second, 0);
-
-                TimeSpan ts = endDateTime.Subtract(startDateTime);
+                if (inMin.Text.Length == 1)
+                {
+                    inMin.Text = "0" + inMin.Text;
+                }
+                if (outMin.Text.Length == 1)
+                {
+                    outMin.Text = "0" + outMin.Text;
+                }
+                TimeSpan ts = getTimeOut().Subtract(getTimeIn());
 
                 string hours = Convert.ToInt32(ts.Hours).ToString();
                 string mins = Convert.ToInt32(ts.Minutes).ToString();
@@ -377,42 +400,31 @@ namespace CommunityServiceHoursTracker
                 {
                     hours = "0" + hours;
                 }
+                //only update time if it is a correct time
 
-
-
-                //if(tabControl1.SelectedTab.Equals(tabPage1))
-                //{
-                //    if ((DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) == 0)
-                //        || (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) < 0)
-                //        || equalDateTimes())
-                //    {
-                //        TotalHoursTextBox.Text = hours + ":" + mins;
-                //    }
-                //    else if (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) > 0)
-                //    {
-                //        MessageBox.Show("Time in is not before time out.");
-                        
-                //        TotalHoursTextBox.Text = "00:00";
-                //    }
-                //}
-
-
-
+                if (Convert.ToInt32(hours) >= 0 && Convert.ToInt32(mins) >= 0)
+                {
+                    TotalHoursTextBox.Text = hours + ":" + mins;
+                }
+                else
+                {
+                    TotalHoursTextBox.Text = "00:00";
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            } 
+            }
         }
 
         private bool equalDateTimes()
         {
             bool check = false;
-            if (dateTimePicker4.Value.Date.Equals(dateTimePicker5.Value.Date))
+            if (getTimeIn().Date.Equals(getTimeOut().Date))
             {
-                if (dateTimePicker4.Value.Hour.Equals(dateTimePicker5.Value.Hour))
+                if (getTimeIn().Hour.Equals(getTimeOut().Hour))
                 {
-                    if (dateTimePicker4.Value.Minute.Equals(dateTimePicker5.Value.Minute))
+                    if (getTimeIn().Minute.Equals(getTimeOut().Minute))
                     {
                         check = true;
                     }
@@ -427,14 +439,14 @@ namespace CommunityServiceHoursTracker
 
             if (tabControl1.SelectedTab.Equals(tabPage1))
             {
-                if ((DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) == 0)
-                    || (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) < 0)
+                if ((DateTime.Compare(getTimeIn(), getTimeOut()) == 0)
+                    || (DateTime.Compare(getTimeIn(), getTimeOut()) < 0)
                     || equalDateTimes())
                 {
                     TotalHoursTextBox.Text = hour + ":" + min;
                     pass = 1;
                 }
-                else if (DateTime.Compare(dateTimePicker4.Value, dateTimePicker5.Value) > 0)
+                else if (DateTime.Compare(getTimeIn(), getTimeOut()) > 0)
                 {
                     MessageBox.Show("Time in is not before time out.");
 
@@ -459,9 +471,9 @@ namespace CommunityServiceHoursTracker
                     MySqlCommand thisCommand = thisConnection.CreateCommand();
                     thisCommand.CommandText = "INSERT INTO event (TimeIn, TimeOut, CaseID) VALUES(@StartTime, @EndTime, @CaseID);";
                     thisCommand.Parameters.Add("@StartTime", MySqlDbType.DateTime);
-                    thisCommand.Parameters["@StartTime"].Value = dateTimePicker4.Value;
+                    thisCommand.Parameters["@StartTime"].Value = getTimeIn();
                     thisCommand.Parameters.Add("@EndTime", MySqlDbType.DateTime);
-                    thisCommand.Parameters["@EndTime"].Value = dateTimePicker5.Value;
+                    thisCommand.Parameters["@EndTime"].Value = getTimeOut();
                     thisCommand.Parameters.Add("@CaseID", MySqlDbType.Int32);
                     thisCommand.Parameters["@CaseID"].Value = SelectCase1DDL.SelectedValue;
                     thisCommand.Prepare();
@@ -1654,9 +1666,43 @@ namespace CommunityServiceHoursTracker
         private void ResetEnterTime()
         {
             resettingTime = true;
-            dateTimePicker4.Value = DateTime.Now;
-            dateTimePicker5.Value = dateTimePicker4.Value;
-            TotalHoursTextBox.Text = "";
+            DateTime time = DateTime.Now;
+            //constructor as follows:
+            //DateTime(int year, int month, int day, int hour, int minute, int second, int millisecond);
+            //create these dates by hand so that the milliseconds don't mess up calculations (set milliseconds on both to zero)
+            DateTime now = new DateTime(time.Year, time.Month, time.Day, time.Hour,
+                time.Minute, time.Second, 0);
+
+            if (now.Day >= 11)
+            {   //PM
+                string hour = Convert.ToString(now.Hour - 12);
+                inHour.Text = hour;
+                outHour.Text = hour;
+                //set to PM
+                inAmPm.SelectedIndex = 1;
+                outAmPm.SelectedIndex = 1;
+            }
+            else
+            {   //AM
+                string hour = Convert.ToString(now.Hour + 1);    //because of hour being index based
+                inHour.Text = hour;
+                outHour.Text = hour;
+                //set to AM
+                inAmPm.SelectedIndex = 0;
+                outAmPm.SelectedIndex = 0;
+            }
+
+            inMonth.Text = Convert.ToString(now.Month);
+            inDay.Text = Convert.ToString(now.Day);
+            inYear.Text = Convert.ToString(now.Year);
+            inMin.Text = Convert.ToString(now.Minute);
+
+            outMonth.Text = Convert.ToString(now.Month);
+            outDay.Text = Convert.ToString(now.Day);
+            outYear.Text = Convert.ToString(now.Year);
+            outMin.Text = Convert.ToString(now.Minute);
+
+            TotalHoursTextBox.Text = "00:00";
             resettingTime = false;
         }
 
@@ -1789,24 +1835,66 @@ namespace CommunityServiceHoursTracker
             }  
         }
 
-        private void TotalHoursTextBox_TextChanged(object sender, EventArgs e)
+        private DateTime getTimeIn()
         {
-
+            int hour;
+            if (inAmPm.SelectedIndex == 0)
+            {   //AM
+                if (inHour.Text.Equals("12"))
+                {
+                    hour = 0;
+                }
+                else
+                {
+                    hour = Convert.ToInt32(inHour.Text);
+                }
+            }
+            else
+            {   //PM
+                if (inHour.Text.Equals("12"))
+                {
+                    hour = Convert.ToInt32(inHour.Text) + 11;
+                }
+                else
+                {
+                    hour = Convert.ToInt32(inHour.Text) + 12;
+                }
+            }
+            //constructor takes year, month, day, hour, minute, second
+            DateTime inDate = new DateTime(Convert.ToInt32(inYear.Text), Convert.ToInt32(inMonth.Text), Convert.ToInt32(inDay.Text),
+                hour, Convert.ToInt32(inMin.Text), 0);
+            return inDate;
         }
 
-        private void grdViewHours_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private DateTime getTimeOut()
         {
-
-        }
-        
-        private void txtTotalHours_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void grdViewHours_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            
+            int hour;
+            if (outAmPm.SelectedIndex == 0)
+            {   //AM
+                if (outHour.Text.Equals("12"))
+                {
+                    hour = 0;
+                }
+                else
+                {
+                    hour = Convert.ToInt32(outHour.Text);
+                }
+            }
+            else
+            {   //PM
+                if (outHour.Text.Equals("12"))
+                {
+                    hour = Convert.ToInt32(outHour.Text) + 11;
+                }
+                else
+                {
+                    hour = Convert.ToInt32(outHour.Text) + 12;
+                }
+            }
+            //constructor takes year, month, day, hour, minute, second
+            DateTime outDate = new DateTime(Convert.ToInt32(outYear.Text), Convert.ToInt32(outMonth.Text), Convert.ToInt32(outDay.Text),
+                hour, Convert.ToInt32(outMin.Text), 0);
+            return outDate;
         }
     }
 }
