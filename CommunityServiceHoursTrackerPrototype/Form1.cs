@@ -1673,9 +1673,17 @@ namespace CommunityServiceHoursTracker
             DateTime now = new DateTime(time.Year, time.Month, time.Day, time.Hour,
                 time.Minute, time.Second, 0);
 
-            if (now.Day >= 11)
+            if (now.Hour >= 12)
             {   //PM
-                string hour = Convert.ToString(now.Hour - 12);
+                string hour;
+                if (now.Hour == 12)
+                {
+                    hour = "12";
+                }
+                else
+                {
+                    hour = Convert.ToString(now.Hour - 12);
+                }
                 inHour.Text = hour;
                 outHour.Text = hour;
                 //set to PM
@@ -1684,7 +1692,15 @@ namespace CommunityServiceHoursTracker
             }
             else
             {   //AM
-                string hour = Convert.ToString(now.Hour + 1);    //because of hour being index based
+                string hour;
+                if (now.Hour == 0)
+                {
+                    hour = "12";
+                }
+                else
+                {
+                    hour = Convert.ToString(now.Hour);
+                }
                 inHour.Text = hour;
                 outHour.Text = hour;
                 //set to AM
@@ -1692,15 +1708,24 @@ namespace CommunityServiceHoursTracker
                 outAmPm.SelectedIndex = 0;
             }
 
+            if (now.Minute < 10 && now.Minute >= 0)
+            {
+                inMin.Text = "0" + now.Minute;
+                outMin.Text = "0" + now.Minute;
+            }
+            else
+            {
+                inMin.Text = Convert.ToString(now.Minute);
+                outMin.Text = Convert.ToString(now.Minute);
+            }
+
             inMonth.Text = Convert.ToString(now.Month);
             inDay.Text = Convert.ToString(now.Day);
             inYear.Text = Convert.ToString(now.Year);
-            inMin.Text = Convert.ToString(now.Minute);
 
             outMonth.Text = Convert.ToString(now.Month);
             outDay.Text = Convert.ToString(now.Day);
             outYear.Text = Convert.ToString(now.Year);
-            outMin.Text = Convert.ToString(now.Minute);
 
             TotalHoursTextBox.Text = "00:00";
             resettingTime = false;
@@ -1747,11 +1772,12 @@ namespace CommunityServiceHoursTracker
                 dataAdapter.SelectCommand = thisCommand;
                 dataAdapter.Fill(DS, "PersonHours");
 
-                TimeSpan total = new TimeSpan();
-                string hours;
-                string mins;
+                string totalHours = "0";
+                string totalMins = "0";
                 DS.Tables["AllHours"].Columns.Add("Time Difference", System.Type.GetType("System.String"));
                 foreach(DataRow r in DS.Tables["AllHours"].Rows){
+                    string hours = "0";
+                    string mins = "0";
                     //constructor as follows:
                     //DateTime(int year, int month, int day, int hour, int minute, int second, int millisecond);
                     //create these dates by hand so that the milliseconds don't mess up calculations (set milliseconds on both to zero)
@@ -1764,7 +1790,11 @@ namespace CommunityServiceHoursTracker
                         initialTimeOut.Minute, initialTimeOut.Second, 0);
                     
                     TimeSpan ts = timeOut - timeIn;
-                    total += ts;
+
+                    //update totals:
+                    totalHours = Convert.ToString(Convert.ToInt32(totalHours) + ts.Hours);
+                    totalMins = Convert.ToString(Convert.ToInt32(totalMins) + ts.Minutes);
+
                     hours = Convert.ToInt32(ts.Hours).ToString();
                     mins = Convert.ToInt32(ts.Minutes).ToString();
                     if ((Convert.ToInt32(mins) < 10) && (Convert.ToInt32(mins) >= 0))
@@ -1778,17 +1808,21 @@ namespace CommunityServiceHoursTracker
 
                     r["Time Difference"] = String.Format("{0}:{1}", hours, mins);
                 }
-                hours = Convert.ToInt32(total.Hours).ToString();
-                mins = Convert.ToInt32(total.Minutes).ToString();
-                if ((Convert.ToInt32(mins) < 10) && (Convert.ToInt32(mins) >= 0))
+                if (Convert.ToInt32(totalMins) > 59)
                 {
-                    mins = "0" + mins;
+                    int extraHours = Convert.ToInt32(totalMins) / 60;
+                    totalHours = Convert.ToString(Convert.ToInt32(totalHours) + extraHours);
+                    totalMins = Convert.ToString(Convert.ToInt32(totalMins) % 60);
                 }
-                if ((Convert.ToInt32(hours) < 10) && (Convert.ToInt32(hours) >= 0))
+                if ((Convert.ToInt32(totalMins) < 10) && (Convert.ToInt32(totalMins) >= 0))
                 {
-                    hours = "0" + hours;
+                    totalMins = "0" + totalMins;
                 }
-                txtTotalHours.Text = String.Format("{0}:{1}", hours, mins);
+                if ((Convert.ToInt32(totalHours) < 10) && (Convert.ToInt32(totalHours) >= 0))
+                {
+                    totalHours = "0" + totalHours;
+                }
+                txtTotalHours.Text = String.Format("{0}:{1}", totalHours, totalMins);
 
                 if (DS.Tables["AllHours"].Rows.Count > 0)
                 {
@@ -1797,29 +1831,31 @@ namespace CommunityServiceHoursTracker
 
                 DataRow dr = DS.Tables["PersonHours"].Rows[0];
                 string neededHours = Convert.ToString(dr["HoursAssigned"]);
+                string hrs;
+                string minutes;
                 if (neededHours.Contains('.'))
                 {
                     char[] sep = { '.' };
                     string[] splitHours = neededHours.Split(sep, 2);
-                    hours = splitHours[0];
-                    mins = splitHours[1];
+                    hrs = splitHours[0];
+                    minutes = splitHours[1];
                 }
                 else
                 {
-                    hours = neededHours;
-                    mins = "0";
+                    hrs = neededHours;
+                    minutes = "0";
                 }
 
-                if ((Convert.ToInt32(mins) < 10) && (Convert.ToInt32(mins) >= 0))
+                if ((Convert.ToInt32(minutes) < 10) && (Convert.ToInt32(minutes) >= 0))
                 {
-                    mins = "0" + mins;
+                    minutes = "0" + minutes;
                 }
-                if ((Convert.ToInt32(hours) < 10) && (Convert.ToInt32(hours) >= 0))
+                if ((Convert.ToInt32(hrs) < 10) && (Convert.ToInt32(hrs) >= 0))
                 {
-                    hours = "0" + hours;
+                    hrs = "0" + hrs;
                 }
 
-                txtNeeded.Text = String.Format("{0}:{1}", hours, mins);
+                txtNeeded.Text = String.Format("{0}:{1}", hrs, minutes);
             }
             catch (MySqlException ee)
             {
