@@ -1935,6 +1935,25 @@ namespace CommunityServiceHoursTracker
 
         private void updateEvent(object sender, EventArgs e)
         {
+            /*
+            try
+            {
+                thisConnection = new MySqlConnection(connStr);
+                thisConnection.Open();
+                MySqlCommand thisCommand = thisConnection.CreateCommand();
+
+                thisCommand.CommandText = "DELECT FROM event WHERE ";
+            }
+            catch (MySqlException ee)
+            {
+                Console.WriteLine(ee.Message);
+            }
+            finally
+            {
+                thisConnection.Close();
+            }*/
+            grdViewHours.Rows.RemoveAt(selectedRowIndex);
+            grdViewHours.Update();
             updateTimeIn(grdViewHours.CurrentRow.Cells[0].Value.ToString());
             updateTimeOut(grdViewHours.CurrentRow.Cells[1].Value.ToString());
             updateButton.Enabled = false;
