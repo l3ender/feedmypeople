@@ -1935,7 +1935,7 @@ namespace CommunityServiceHoursTracker
 
         private void updateEvent(object sender, EventArgs e)
         {
-            MessageBox.Show("test:" + grdViewHours.Rows[0]);
+            MessageBox.Show(grdViewHours.CurrentCell.Value.ToString());
         }
 
         private void dataGridCellClick(object sender, DataGridViewCellEventArgs e)
