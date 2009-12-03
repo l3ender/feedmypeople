@@ -1889,7 +1889,7 @@ namespace CommunityServiceHoursTracker
             {   //PM
                 if (inHour.Text.Equals("12"))
                 {
-                    hour = Convert.ToInt32(inHour.Text) + 11;
+                    hour = 12;
                 }
                 else
                 {
@@ -1920,7 +1920,7 @@ namespace CommunityServiceHoursTracker
             {   //PM
                 if (outHour.Text.Equals("12"))
                 {
-                    hour = Convert.ToInt32(outHour.Text) + 11;
+                    hour = 12;
                 }
                 else
                 {
@@ -1931,6 +1931,11 @@ namespace CommunityServiceHoursTracker
             DateTime outDate = new DateTime(Convert.ToInt32(outYear.Text), Convert.ToInt32(outMonth.Text), Convert.ToInt32(outDay.Text),
                 hour, Convert.ToInt32(outMin.Text), 0);
             return outDate;
+        }
+
+        private void inHour_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

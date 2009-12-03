@@ -370,6 +370,7 @@
             this.inHour.Size = new System.Drawing.Size(28, 20);
             this.inHour.TabIndex = 94;
             this.inHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.inHour.TextChanged += new System.EventHandler(this.inHour_TextChanged);
             this.inHour.Leave += new System.EventHandler(this.dateValueChanged);
             // 
             // inYear
@@ -439,7 +440,7 @@
             this.grdViewHours.AllowUserToDeleteRows = false;
             this.grdViewHours.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdViewHours.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdViewHours.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.grdViewHours.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.grdViewHours.Location = new System.Drawing.Point(482, 72);
             this.grdViewHours.Name = "grdViewHours";
             this.grdViewHours.RowHeadersVisible = false;
