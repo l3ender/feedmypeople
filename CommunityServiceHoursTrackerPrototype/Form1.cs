@@ -774,7 +774,7 @@ namespace CommunityServiceHoursTracker
                 thisConnection = new MySqlConnection(connStr);
                 thisConnection.Open();
                 MySqlCommand thisCommand = thisConnection.CreateCommand();
-                thisCommand.CommandText = "SELECT CaseNum, HoursAssigned, AgencyContactDate, EstimatedCompletionDate, Status, WeeklyReq FROM cases WHERE PersonID = '" + SelectVolunteer2DDL.SelectedValue + "' AND CaseID = '" + SelectCase2DDL.SelectedValue + "';";
+                thisCommand.CommandText = "SELECT CaseNum, HoursAssigned, AgencyContactDate, EstimatedCompletionDate, Status, WeeklyReq FROM cases WHERE PersonID = '" + SelectVolunteer2DDL.SelectedValue + "' AND = '" + SelectCase2DDL.SelectedValue + "';";
 
                 MySqlDataAdapter dataAdapter = new MySqlDataAdapter(thisCommand.CommandText, thisConnection);
                 MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
@@ -1935,14 +1935,29 @@ namespace CommunityServiceHoursTracker
 
         private void updateEvent(object sender, EventArgs e)
         {
-            /*
+
+          //  MessageBox.Show(grdViewHours.CurrentRow.Cells[0].Value.ToString());
+            DateTime dateTimeIn = DateTime.Parse(grdViewHours.CurrentRow.Cells[0].Value.ToString());
+           // MessageBox.Show(dateTimeIn.ToString());
+           // MessageBox.Show(grdViewHours.CurrentRow.Cells[1].Value.ToString());
+            DateTime dateTimeOut = DateTime.Parse(grdViewHours.CurrentRow.Cells[1].Value.ToString());
+           // MessageBox.Show(dateTimeOut.ToString());
+            MessageBox.Show(SelectCase1DDL.Text);
+
+
+            updateTimeIn(grdViewHours.CurrentRow.Cells[0].Value.ToString());
+            updateTimeOut(grdViewHours.CurrentRow.Cells[1].Value.ToString());
+            DataGridViewRow row = grdViewHours.SelectedRows[0];
+            grdViewHours.Rows.Remove(row);
+            
             try
             {
                 thisConnection = new MySqlConnection(connStr);
                 thisConnection.Open();
                 MySqlCommand thisCommand = thisConnection.CreateCommand();
-
-                thisCommand.CommandText = "DELECT FROM event WHERE ";
+                MessageBox.Show("Deleting from event");
+                thisCommand.CommandText = "DELETE FROM event WHERE TimeIn = '" + dateTimeIn + "' AS YYYY-MM-DD HH:MI:SS(24h) AND TimeOut = '" + dateTimeOut + "' AS YYYY-MM-DD HH:MI:SS(24h) AND CASEID = '" + Convert.ToInt32(SelectCase1DDL.Text) + "' ;";
+                MessageBox.Show(thisCommand.CommandText.ToString());
             }
             catch (MySqlException ee)
             {
@@ -1951,11 +1966,9 @@ namespace CommunityServiceHoursTracker
             finally
             {
                 thisConnection.Close();
-            }*/
-            grdViewHours.Rows.RemoveAt(selectedRowIndex);
+            }
+            
             grdViewHours.Update();
-            updateTimeIn(grdViewHours.CurrentRow.Cells[0].Value.ToString());
-            updateTimeOut(grdViewHours.CurrentRow.Cells[1].Value.ToString());
             updateButton.Enabled = false;
         }
 

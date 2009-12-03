@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.updateButton = new System.Windows.Forms.Button();
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -116,7 +117,6 @@
             this.CreateMonthlyReportButton = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.updateButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewHours)).BeginInit();
@@ -183,6 +183,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Enter Time";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // updateButton
+            // 
+            this.updateButton.Enabled = false;
+            this.updateButton.Location = new System.Drawing.Point(608, 333);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(106, 24);
+            this.updateButton.TabIndex = 114;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateEvent);
             // 
             // label37
             // 
@@ -445,6 +456,7 @@
             this.grdViewHours.Location = new System.Drawing.Point(482, 72);
             this.grdViewHours.Name = "grdViewHours";
             this.grdViewHours.RowHeadersVisible = false;
+            this.grdViewHours.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdViewHours.Size = new System.Drawing.Size(359, 191);
             this.grdViewHours.TabIndex = 86;
             this.grdViewHours.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCellClick);
@@ -1022,17 +1034,6 @@
             this.label20.Size = new System.Drawing.Size(241, 13);
             this.label20.TabIndex = 80;
             this.label20.Text = "Community Service Hours Monthly Report";
-            // 
-            // updateButton
-            // 
-            this.updateButton.Enabled = false;
-            this.updateButton.Location = new System.Drawing.Point(608, 333);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(106, 24);
-            this.updateButton.TabIndex = 114;
-            this.updateButton.Text = "Update";
-            this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.updateEvent);
             // 
             // Form1
             // 
