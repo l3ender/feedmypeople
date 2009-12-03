@@ -116,6 +116,7 @@
             this.CreateMonthlyReportButton = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.updateButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewHours)).BeginInit();
@@ -140,6 +141,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.updateButton);
             this.tabPage1.Controls.Add(this.label37);
             this.tabPage1.Controls.Add(this.label36);
             this.tabPage1.Controls.Add(this.label35);
@@ -370,7 +372,6 @@
             this.inHour.Size = new System.Drawing.Size(28, 20);
             this.inHour.TabIndex = 94;
             this.inHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.inHour.TextChanged += new System.EventHandler(this.inHour_TextChanged);
             this.inHour.Leave += new System.EventHandler(this.dateValueChanged);
             // 
             // inYear
@@ -446,6 +447,7 @@
             this.grdViewHours.RowHeadersVisible = false;
             this.grdViewHours.Size = new System.Drawing.Size(359, 191);
             this.grdViewHours.TabIndex = 86;
+            this.grdViewHours.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCellClick);
             // 
             // TotalHoursTextBox
             // 
@@ -1021,6 +1023,17 @@
             this.label20.TabIndex = 80;
             this.label20.Text = "Community Service Hours Monthly Report";
             // 
+            // updateButton
+            // 
+            this.updateButton.Enabled = false;
+            this.updateButton.Location = new System.Drawing.Point(608, 333);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(106, 24);
+            this.updateButton.TabIndex = 114;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateEvent);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1142,6 +1155,9 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button updateButton;
+        private int selectedColumnIndex;
+        private int selectedRowIndex;
     }
 }
 

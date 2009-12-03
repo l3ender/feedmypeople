@@ -1933,9 +1933,16 @@ namespace CommunityServiceHoursTracker
             return outDate;
         }
 
-        private void inHour_TextChanged(object sender, EventArgs e)
+        private void updateEvent(object sender, EventArgs e)
         {
+            MessageBox.Show("test:" + grdViewHours.Rows[0]);
+        }
 
+        private void dataGridCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            updateButton.Enabled = true;
+            selectedColumnIndex = e.ColumnIndex;
+            selectedRowIndex = e.RowIndex;
         }
     }
 }
