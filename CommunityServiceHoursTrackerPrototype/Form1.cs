@@ -1937,6 +1937,7 @@ namespace CommunityServiceHoursTracker
         {
             updateTimeIn(grdViewHours.CurrentRow.Cells[0].Value.ToString());
             updateTimeOut(grdViewHours.CurrentRow.Cells[1].Value.ToString());
+            updateButton.Enabled = false;
         }
 
         private void updateTimeIn(string cell) //cell is in format "DD/MM/YYYY HH:MM:SS PM"
