@@ -1935,7 +1935,34 @@ namespace CommunityServiceHoursTracker
 
         private void updateEvent(object sender, EventArgs e)
         {
-            MessageBox.Show(grdViewHours.CurrentCell.Value.ToString());
+            updateTimeIn(grdViewHours.CurrentRow.Cells[0].Value.ToString());
+            updateTimeOut(grdViewHours.CurrentRow.Cells[1].Value.ToString());
+        }
+
+        private void updateTimeIn(string cell) //cell is in format "DD/MM/YYYY HH:MM:SS PM"
+        {
+            string date = cell.Split(' ')[0];
+            string time = cell.Split(' ')[1];
+            string amPm = cell.Split(' ')[2];
+            inMonth.Text = date.Split('/')[0];
+            inDay.Text = date.Split('/')[1];
+            inYear.Text = date.Split('/')[2];
+            inHour.Text = time.Split(':')[0];
+            inMin.Text = time.Split(':')[1];
+            inAmPm.Text = amPm;
+        }
+
+        private void updateTimeOut(string cell) //cell is in format "DD/MM/YYYY HH:MM:SS PM"
+        {
+            string date = cell.Split(' ')[0];
+            string time = cell.Split(' ')[1];
+            string amPm = cell.Split(' ')[2];
+            outMonth.Text = date.Split('/')[0];
+            outDay.Text = date.Split('/')[1];
+            outYear.Text = date.Split('/')[2];
+            outHour.Text = time.Split(':')[0];
+            outMin.Text = time.Split(':')[1];
+            outAmPm.Text = amPm;
         }
 
         private void dataGridCellClick(object sender, DataGridViewCellEventArgs e)
