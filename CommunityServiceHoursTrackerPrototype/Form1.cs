@@ -1935,18 +1935,10 @@ namespace CommunityServiceHoursTracker
 
         private void updateEvent(object sender, EventArgs e)
         {
-
-          //  MessageBox.Show(grdViewHours.CurrentRow.Cells[0].Value.ToString());
-            DateTime dateTimeIn = DateTime.Parse(grdViewHours.CurrentRow.Cells[0].Value.ToString());
-           // MessageBox.Show(dateTimeIn.ToString());
-           // MessageBox.Show(grdViewHours.CurrentRow.Cells[1].Value.ToString());
-            DateTime dateTimeOut = DateTime.Parse(grdViewHours.CurrentRow.Cells[1].Value.ToString());
-           // MessageBox.Show(dateTimeOut.ToString());
-            MessageBox.Show(SelectCase1DDL.Text);
-
-
-            updateTimeIn(grdViewHours.CurrentRow.Cells[0].Value.ToString());
-            updateTimeOut(grdViewHours.CurrentRow.Cells[1].Value.ToString());
+            string timeIn = grdViewHours.CurrentRow.Cells[0].Value.ToString();
+            string timeOut = grdViewHours.CurrentRow.Cells[1].Value.ToString();
+            updateTimeIn(timeIn);
+            updateTimeOut(timeOut);
             DataGridViewRow row = grdViewHours.SelectedRows[0];
             grdViewHours.Rows.Remove(row);
             
@@ -1955,9 +1947,10 @@ namespace CommunityServiceHoursTracker
                 thisConnection = new MySqlConnection(connStr);
                 thisConnection.Open();
                 MySqlCommand thisCommand = thisConnection.CreateCommand();
-                MessageBox.Show("Deleting from event");
-                thisCommand.CommandText = "DELETE FROM event WHERE TimeIn = '" + dateTimeIn + "' AS YYYY-MM-DD HH:MI:SS(24h) AND TimeOut = '" + dateTimeOut + "' AS YYYY-MM-DD HH:MI:SS(24h) AND CASEID = '" + Convert.ToInt32(SelectCase1DDL.Text) + "' ;";
-                MessageBox.Show(thisCommand.CommandText.ToString());
+                //delete from event where TimeIn = DATE_FORMAT('2009-12-03 12:13', '%Y-%c-%d %h:%i');
+                thisCommand.CommandText = "DELETE FROM event WHERE CaseID = (SELECT CaseId FROM cases WHERE CaseNum = '" + SelectCase1DDL.Text + "') AND TimeIn = DATE_FORMAT('" + getDatabaseString(timeIn) + "', '%Y-%c-%e %H:%i') " + 
+                    "AND TimeOut = DATE_FORMAT('" + getDatabaseString(timeOut) + "', '%Y-%c-%e %H:%i');";
+                thisCommand.ExecuteNonQuery();
             }
             catch (MySqlException ee)
             {
@@ -1972,7 +1965,48 @@ namespace CommunityServiceHoursTracker
             updateButton.Enabled = false;
         }
 
-        private void updateTimeIn(string cell) //cell is in format "DD/MM/YYYY HH:MM:SS PM"
+        private string getDatabaseString(string cell) //cell is in format "MM/DD/YYYY HH:MM:SS PM"
+        {
+            //need to return format "YYYY-MM-DD HH:MM", where hours are 0-23
+            string date = cell.Split(' ')[0];
+            string time = cell.Split(' ')[1];
+            string amPm = cell.Split(' ')[2];
+
+            string year = date.Split('/')[2];
+            string month = date.Split('/')[0];
+            string day = date.Split('/')[1];
+            string min = time.Split(':')[1];
+            string hour = "";
+
+            string oldHour = time.Split(':')[0];
+            if (amPm.Equals("PM"))
+            {
+                if (oldHour.Equals("12"))
+                {
+                    hour = "12";
+                }
+                else
+                {
+                    hour = Convert.ToString(12 + Convert.ToInt32(oldHour));
+                }
+            }
+            else
+            {   //AM
+                if (oldHour.Equals("12"))
+                {
+                    hour = "0";
+                }
+                else
+                {
+                    hour = oldHour;
+                }
+            }
+
+            //YYYY-MM-DD HH:MM
+            return (year + "-" + month + "-" + day + " " + hour + ":" + min);
+        }
+
+        private void updateTimeIn(string cell) //cell is in format "MM/DD/YYYY HH:MM:SS PM"
         {
             string date = cell.Split(' ')[0];
             string time = cell.Split(' ')[1];
@@ -1985,7 +2019,7 @@ namespace CommunityServiceHoursTracker
             inAmPm.Text = amPm;
         }
 
-        private void updateTimeOut(string cell) //cell is in format "DD/MM/YYYY HH:MM:SS PM"
+        private void updateTimeOut(string cell) //cell is in format "MM/DD/YYYY HH:MM:SS PM"
         {
             string date = cell.Split(' ')[0];
             string time = cell.Split(' ')[1];
