@@ -387,7 +387,7 @@ namespace CommunityServiceHoursTracker
                 }
                 TimeSpan ts = getTimeOut().Subtract(getTimeIn());
 
-                string hours = Convert.ToInt32(ts.Hours).ToString();
+                string hours = Convert.ToInt32(ts.TotalHours).ToString();
                 string mins = Convert.ToInt32(ts.Minutes).ToString();
                 hour = hours;
                 min = mins;
@@ -408,7 +408,7 @@ namespace CommunityServiceHoursTracker
                 }
                 else
                 {
-                    TotalHoursTextBox.Text = "00:00";
+                    TotalHoursTextBox.Text = "Invalid";
                 }
             }
             catch (Exception ex)
@@ -1791,12 +1791,13 @@ namespace CommunityServiceHoursTracker
                     
                     TimeSpan ts = timeOut - timeIn;
 
-                    //update totals:
-                    totalHours = Convert.ToString(Convert.ToInt32(totalHours) + ts.Hours);
-                    totalMins = Convert.ToString(Convert.ToInt32(totalMins) + ts.Minutes);
-
-                    hours = Convert.ToInt32(ts.Hours).ToString();
+                    hours = Convert.ToInt32(ts.TotalHours).ToString();
                     mins = Convert.ToInt32(ts.Minutes).ToString();
+
+                    //update totals:
+                    totalHours = Convert.ToString(Convert.ToInt32(totalHours) + Convert.ToInt32(hours));
+                    totalMins = Convert.ToString(Convert.ToInt32(totalMins) + Convert.ToInt32(mins));
+
                     if ((Convert.ToInt32(mins) < 10) && (Convert.ToInt32(mins) >= 0))
                     {
                         mins = "0" + mins;
