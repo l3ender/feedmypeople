@@ -387,7 +387,7 @@ namespace CommunityServiceHoursTracker
                 }
                 TimeSpan ts = getTimeOut().Subtract(getTimeIn());
 
-                string hours = Convert.ToInt32(ts.TotalHours).ToString();
+                string hours = Convert.ToInt32(ts.Hours).ToString();
                 string mins = Convert.ToInt32(ts.Minutes).ToString();
                 hour = hours;
                 min = mins;
@@ -451,6 +451,10 @@ namespace CommunityServiceHoursTracker
                     MessageBox.Show("Time in is not before time out.");
 
                     TotalHoursTextBox.Text = "00:00";
+                }
+                if (!(inDay.Text.Equals(outDay.Text))) {
+                    MessageBox.Show("Time in and time out days must be the same.");
+                    pass = 0;
                 }
             }
             return pass;
@@ -1791,7 +1795,7 @@ namespace CommunityServiceHoursTracker
                     
                     TimeSpan ts = timeOut - timeIn;
 
-                    hours = Convert.ToInt32(ts.TotalHours).ToString();
+                    hours = Convert.ToInt32(ts.Hours).ToString();
                     mins = Convert.ToInt32(ts.Minutes).ToString();
 
                     //update totals:

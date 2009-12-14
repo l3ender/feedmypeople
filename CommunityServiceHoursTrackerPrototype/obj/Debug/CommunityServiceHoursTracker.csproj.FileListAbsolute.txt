@@ -179,3 +179,6 @@ C:\Documents and Settings\benderrr\Desktop\workspace\CommunityServiceHoursTracke
 C:\Documents and Settings\benderrr\Desktop\workspace\CommunityServiceHoursTrackerPrototype\obj\Debug\CommunityServiceHoursTracker.csproj.GenerateResource.Cache
 C:\Documents and Settings\benderrr\Desktop\workspace\CommunityServiceHoursTrackerPrototype\obj\Debug\CommunityServiceHoursTracker.exe
 C:\Documents and Settings\benderrr\Desktop\workspace\CommunityServiceHoursTrackerPrototype\obj\Debug\CommunityServiceHoursTracker.pdb
+C:\Documents and Settings\Ross\Desktop\feedmypeople\CommunityServiceHoursTrackerPrototype\bin\Debug\CommunityServiceHoursTracker.exe.config
+C:\Documents and Settings\Ross\Desktop\feedmypeople\CommunityServiceHoursTrackerPrototype\obj\Debug\CommunityServiceHoursTracker.exe
+C:\Documents and Settings\Ross\Desktop\feedmypeople\CommunityServiceHoursTrackerPrototype\obj\Debug\CommunityServiceHoursTracker.pdb
